@@ -53,6 +53,5 @@ vslkp <- function(bk = "Genesis", ch = 1, vs = NA, translation = 'kjv') {
    ref <- paste0(toupper(bk), '.', ch, ' -')
    verses <- paste(' (', vs,')', txt, sep = '', collapse = '')
    paste0(ref, verses)
-
   }
 }
