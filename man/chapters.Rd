@@ -5,7 +5,7 @@
 \title{Get a list of available chapters}
 \usage{
 chapters(
-  bibleid = NULL,
+  bibleid = Sys.getenv("MAIN_BIBLEID"),
   bookid = NULL,
   debug = FALSE,
   apikey = Sys.getenv("BIBLER_APIKEY")

@@ -5,7 +5,7 @@
 \title{Get chapter contents}
 \usage{
 chapter(
-  bibleid = NULL,
+  bibleid = Sys.getenv("MAIN_BIBLEID"),
   chapterid = NULL,
   contenttype = "json",
   includenotes = FALSE,

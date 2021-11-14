@@ -5,7 +5,7 @@
 \title{Search the Bible}
 \usage{
 bible_search(
-  bibleid = NULL,
+  bibleid = Sys.getenv("MAIN_BIBLEID"),
   query = NULL,
   limit = 10,
   offset = NULL,

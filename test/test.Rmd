@@ -32,28 +32,27 @@ chapters
 ```{r}
 
 bookid <- "GEN"
-ch <- chapters('gen')
+ch <- chapters(bookid = 'gen')
 
-
+ch
 ```
 
-chapters
+chapter
 
 ```{r}
 bibleid <- '55212e3cf5d04d49-01'  #kjv
 bookid <- "GEN"
 chapterid <- 'GEN.1'
-ch <- chapter(bibleid, 
-              chapterid, 
+ch <- chapter(chapterid = 'gen.1', 
               includenotes = T,
-              contenttype = 'html',
+              contenttype = 'text',
               includeversenumbers = F, 
               includetitles = T,
               debug = F)
-ch
+ch$content
 ```
 
-## passages
+## passage
 
 ```{r}
 bibleid <- '55212e3cf5d04d49-01'  #kjv

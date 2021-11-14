@@ -80,6 +80,6 @@ chapter <- function(bibleid = Sys.getenv('MAIN_BIBLEID'),
   #check status
   httr::stop_for_status(req, task = httr::content(req)$message)
 
-  return(httr::content(req)$data)
+  return(httr::content(req)$data$content)
 
 }

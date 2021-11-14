@@ -5,7 +5,7 @@
 \title{Get a list of available books}
 \usage{
 books(
-  bibleid = NULL,
+  bibleid = Sys.getenv("MAIN_BIBLEID"),
   chapters = FALSE,
   sections = FALSE,
   debug = FALSE,

@@ -5,7 +5,7 @@
 \title{Get a list of available verses}
 \usage{
 verses(
-  bibleid = NULL,
+  bibleid = Sys.getenv("MAIN_BIBLEID"),
   chapterid = NULL,
   debug = FALSE,
   apikey = Sys.getenv("BIBLER_APIKEY")

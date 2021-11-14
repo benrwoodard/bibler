@@ -5,7 +5,7 @@
 \title{Get a verse}
 \usage{
 verse(
-  bibleid = NULL,
+  bibleid = Sys.getenv("MAIN_BIBLEID"),
   verseid = NULL,
   contenttype = "text",
   includenotes = FALSE,

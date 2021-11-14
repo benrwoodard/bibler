@@ -3,3 +3,4 @@
 source/
 ^LICENSE\.md$
 test/
+.Renviron

@@ -5,7 +5,7 @@
 \title{Get passage contents}
 \usage{
 passage(
-  bibleid = NULL,
+  bibleid = Sys.getenv("MAIN_BIBLEID"),
   passageid = NULL,
   contenttype = "json",
   includenotes = FALSE,
