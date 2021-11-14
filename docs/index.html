@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">bibler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9003</span>
       </span>
     </div>
 
@@ -59,7 +59,86 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-This will assist in Bible study and analyzing scripture.
+<div id="bibler" class="section level1">
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#bibler" class="anchor"></a>bibler</h1></div>
+<!-- badges: start -->
+<!-- badges: end -->
+<p>The goal of bibler is to enable the analyst to use and improve their skills while enhancing their Bible Study time.</p>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<p>bibler is not on CRAN yet but you can download the development version from <a href="https://github.com/">GitHub</a> with:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"benrwoodard/bibler"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="authentication" class="section level2">
+<h2 class="hasAnchor">
+<a href="#authentication" class="anchor"></a>Authentication</h2>
+<p>The bibler package relies on the <a href="https://scripture.api.bible/">API.Bible</a> project. I honestly do not know much about it other than what I have read on <a href="https://docs.api.bible/">the welcome page</a>. I went through several different iterations in the development of the package and finally settled on this API because of the simplicity and solid documentation.</p>
+<p><strong>Current Process</strong> In order to pull any data from the API you will need to signup for an account.</p>
+<ol>
+<li>Register as a Developer</li>
+</ol>
+<p>The first step to get access to API.Bible is to register as a developer. Fill out and submit the form at <a href="https://scripture.api.bible/signup" class="uri">https://scripture.api.bible/signup</a>.</p>
+<p>Once you submit the form, you will receive an email with a link to verify your email address. You will be able to sign in to your account after verifying your email. If you don’t see the email, be sure to check your spam folder.</p>
+<ol>
+<li>Create your App</li>
+</ol>
+<p>Once you have an account, create your app by going to <a href="https://scripture.api.bible/admin/applications/new" class="uri">https://scripture.api.bible/admin/applications/new</a>. You should be taken there automatically the first time you login to your account. After submitting your application, you must wait for it to be approved.</p>
+<p>When you create an app, you are also applying for an API key. Give as much information as possible to make it more likely your app will be approved."</p>
+<ol>
+<li>Add the API Key</li>
+</ol>
+<p>Once you have been approved you can go into your account and copy the API key. You can either use this in very function as an argument, <code>apikey =</code>, or add it to the .Renviron* file (recommended). Once added to the .Renviron file using the variable name <code>BIBLER_APIKEY</code> you need to <strong>restart your R session</strong>.</p>
+<p>Now you are ready to being pulling data from the API.</p>
+<p>*For more information about the .Renviron file, <a href="http://www.dartistics.com/renviron.html">go here</a>.</p>
+</div>
+<div id="examples" class="section level2">
+<h2 class="hasAnchor">
+<a href="#examples" class="anchor"></a>Examples</h2>
+<p>Here are some basic functions you an use to get started:</p>
+<ol>
+<li>Pull a list of all available bibles</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">bibler</span><span class="op">)</span>
+
+<span class="va">bibles_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/bibles.html">bibles</a></span><span class="op">(</span>language <span class="op">=</span> <span class="st">'eng'</span>, name <span class="op">=</span> <span class="st">'king james'</span><span class="op">)</span>
+
+<span class="va">bibles_list</span>
+<span class="co">#&gt; # A tibble: 2 × 14</span>
+<span class="co">#&gt;   id       dblId   relatedDbl name      nameLocal  abbreviation abbreviationLoc…</span>
+<span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt;           </span>
+<span class="co">#&gt; 1 de4e12a… de4e12… NULL       King Jam… King Jame… engKJV       KJV             </span>
+<span class="co">#&gt; 2 de4e12a… de4e12… NULL       King Jam… King Jame… engKJV       KJV             </span>
+<span class="co">#&gt; # … with 7 more variables: description &lt;chr&gt;, descriptionLocal &lt;chr&gt;,</span>
+<span class="co">#&gt; #   language &lt;chr&gt;, countries &lt;chr&gt;, type &lt;chr&gt;, updatedAt &lt;chr&gt;,</span>
+<span class="co">#&gt; #   audioBibles &lt;chr&gt;</span></code></pre></div>
+<p>This result will show you all the different translations with the phrase ‘king james’ in the <code>name</code>. I recommend copying the id of your main version and adding that to the .Renviron file for quicker function calls. The package is developed to reference the API key and main Bible Id using the .Renviron file. Add <code>MAIN_BIBLEID</code> as a variable in the file and restart the R session.</p>
+<ol>
+<li>Search to find a word or phrase you have been looking for.</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/bible_search.html">bible_search</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">'moses held'</span><span class="op">)</span>
+<span class="co">#&gt; You search results are ready now. Your request limited to the results to 10.</span>
+<span class="co">#&gt; There are 11 results available.</span>
+<span class="co">#&gt; # A tibble: 10 × 2</span>
+<span class="co">#&gt;    reference verse                                                              </span>
+<span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;                                                              </span>
+<span class="co">#&gt;  1 EXO.34.8  And Moses made haste, and bowed his head toward the earth, and wor…</span>
+<span class="co">#&gt;  2 EXO.17.11 And it came to pass, when Moses held up his hand, that Israel prev…</span>
+<span class="co">#&gt;  3 LEV.8.20  And he cut the ram into pieces; and Moses burnt the head, and the …</span>
+<span class="co">#&gt;  4 LEV.10.3  Then Moses said unto Aaron, This is it  that the  LORD  spake, say…</span>
+<span class="co">#&gt;  5 LEV.8.9   And he put the mitre upon his head; also upon the mitre, even  upo…</span>
+<span class="co">#&gt;  6 DEU.27.9  ¶ And Moses and the priests the Levites spake unto all Israel, say…</span>
+<span class="co">#&gt;  7 ACT.26.22 Having therefore obtained help of God, I continue unto this day, w…</span>
+<span class="co">#&gt;  8 1CH.22.13 Then shalt thou prosper, if thou takest heed to fulfil the statute…</span>
+<span class="co">#&gt;  9 JOS.1.14  Your wives, your little ones, and your cattle, shall remain in the…</span>
+<span class="co">#&gt; 10 2CH.33.8  Neither will I any more remove the foot of Israel from out of the …</span></code></pre></div>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
