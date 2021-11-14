@@ -31,6 +31,7 @@ bibles <- function(language = NULL,
   if(!is.na(paste(ids,collapse=","))) {
     ids <- paste(ids,collapse=",")
   }
+  name = URLencode(name)
 
   vars <- tibble::tibble(language,
                          abbreviation,

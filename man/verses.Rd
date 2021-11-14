@@ -5,16 +5,16 @@
 \title{Get a list of available verses}
 \usage{
 verses(
-  bibleid = Sys.getenv("MAIN_BIBLEID"),
   chapterid = NULL,
+  bibleid = Sys.getenv("MAIN_BIBLEID"),
   debug = FALSE,
   apikey = Sys.getenv("BIBLER_APIKEY")
 )
 }
 \arguments{
-\item{bibleid}{Id of Bible whose Verses to fetch}
-
 \item{chapterid}{Id of the Book whose Verses to fetch}
+
+\item{bibleid}{Id of Bible whose Verses to fetch}
 
 \item{debug}{Used to help debug the query}
 

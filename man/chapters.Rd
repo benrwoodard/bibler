@@ -5,16 +5,16 @@
 \title{Get a list of available chapters}
 \usage{
 chapters(
-  bibleid = Sys.getenv("MAIN_BIBLEID"),
   bookid = NULL,
+  bibleid = Sys.getenv("MAIN_BIBLEID"),
   debug = FALSE,
   apikey = Sys.getenv("BIBLER_APIKEY")
 )
 }
 \arguments{
-\item{bibleid}{Id of Bible whose Chapters to fetch}
-
 \item{bookid}{Id of the Book whose Chapters to fetch}
+
+\item{bibleid}{Id of Bible whose Chapters to fetch}
 
 \item{debug}{Used to help debug the query}
 

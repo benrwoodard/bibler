@@ -22,14 +22,15 @@
 #' @importFrom httr verbose
 #' @importFrom utils URLencode
 #' @importFrom purrr map_chr
+#'
 #' @export
-bible_search <- function(bibleid = Sys.getenv('MAIN_BIBLEID'),
-                         query = NULL,
+bible_search <- function(query = NULL,
                          limit = 10,
                          offset = NULL,
                          sort = 'relevance',
                          range = NULL,
                          fuzziness = 'AUTO',
+                         bibleid = Sys.getenv('MAIN_BIBLEID'),
                          debug = FALSE,
                          apikey = Sys.getenv('BIBLER_APIKEY')) {
 

@@ -12,7 +12,7 @@ Bibles
 library(bibler)
 library(tidyverse)
 check <- bibles(language = 'grc', details = T)
-check <- bibles(language = 'eng',name = 'k', details = T)
+check <- bibles(language = 'eng',name = 'king james', details = T)
 check
 ```
 

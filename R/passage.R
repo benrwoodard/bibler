@@ -12,6 +12,7 @@
 #' @param includeversespans Include spans that wrap verse numbers and verse text for bible content.
 #' @param parallels Comma delimited list of bibleIds to include
 #' @param useorgid Use the supplied id(s) to match the verseOrgId instead of the verseId
+#' @param returnstring Do you want a table or a string to be returned
 #' @param debug Used to help debug the query
 #' @param apikey API.bible api key. Sign up here https://scripture.api.bible/signup
 #'
@@ -23,8 +24,9 @@
 #' @importFrom httr RETRY
 #' @importFrom httr add_headers
 #' @importFrom httr verbose
+#' @importFrom rlang :=
 #' @export
-passage <- function(passageid = NULL,
+passage <- function(passageid = "mrk.1",
                     contenttype = 'text',
                     includenotes = FALSE,
                     includetitles = TRUE,
@@ -33,6 +35,7 @@ passage <- function(passageid = NULL,
                     includeversespans = FALSE,
                     parallels = NULL,
                     useorgid = FALSE,
+                    returnstring = TRUE,
                     bibleid = Sys.getenv('MAIN_BIBLEID'),
                     debug = FALSE,
                     apikey = Sys.getenv('BIBLER_APIKEY')) {
@@ -84,6 +87,14 @@ passage <- function(passageid = NULL,
   httr::stop_for_status(req, task = httr::content(req)$message)
 
   res <- httr::content(req)$data
-  return(c(res$reference= res$content))
+  colname <- res$reference
+  return(
+    if(returnstring){
+      glue::glue('{res$id} {res$content}')
+    } else {
+      tibble::tibble("{colname}" := glue::glue('{res$id} {res$content}'))
+    }
+    )
+
 
 }

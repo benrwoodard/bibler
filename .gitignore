@@ -2,7 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
-
-/source
-/data-raw
 .Renviron
+source/
+data-raw/
+

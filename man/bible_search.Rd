@@ -5,20 +5,18 @@
 \title{Search the Bible}
 \usage{
 bible_search(
-  bibleid = Sys.getenv("MAIN_BIBLEID"),
   query = NULL,
   limit = 10,
   offset = NULL,
   sort = "relevance",
   range = NULL,
   fuzziness = "AUTO",
+  bibleid = Sys.getenv("MAIN_BIBLEID"),
   debug = FALSE,
   apikey = Sys.getenv("BIBLER_APIKEY")
 )
 }
 \arguments{
-\item{bibleid}{Identifies the Bible version (required)}
-
 \item{query}{Search keywords or passage reference. Supported wildcards are * and ?.The * wildcard matches any character sequence (e.g. searching for "wo*d" finds text such as "word", "world", and "worshipped"). The ? wildcard matches any matches any single character (e.g. searching for "l?ve" finds text such as "live" and "love").}
 
 \item{limit}{Integer limit for how many matching results to return. Default is 10.}
@@ -30,6 +28,8 @@ bible_search(
 \item{range}{One or more, comma separated, passage ids (book, chapter, verse) which the search will be limited to. (i.e. gen.1,gen.5 or gen-num or gen.1.1-gen.3.5)}
 
 \item{fuzziness}{Sets the fuzziness of a search to account for misspellings. Values can be 0, 1, 2, or AUTO. Defaults to AUTO which varies depending on the}
+
+\item{bibleid}{Identifies the Bible version (required)}
 
 \item{debug}{Used to help debug the query}
 

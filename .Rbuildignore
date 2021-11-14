@@ -1,6 +1,8 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-source/
+source
 ^LICENSE\.md$
-test/
+test
 .Renviron
+^README\.Rmd$
+docs

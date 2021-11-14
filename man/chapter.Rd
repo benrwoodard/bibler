@@ -5,9 +5,9 @@
 \title{Get chapter contents}
 \usage{
 chapter(
-  bibleid = Sys.getenv("MAIN_BIBLEID"),
   chapterid = NULL,
-  contenttype = "json",
+  bibleid = Sys.getenv("MAIN_BIBLEID"),
+  contenttype = "text",
   includenotes = FALSE,
   includetitles = TRUE,
   includechapternumbers = FALSE,
@@ -19,9 +19,9 @@ chapter(
 )
 }
 \arguments{
-\item{bibleid}{Id of Bible whose Chapters to fetch}
-
 \item{chapterid}{Id of the Chapter to fetch}
+
+\item{bibleid}{Id of Bible whose Chapters to fetch}
 
 \item{contenttype}{Content type to be returned in the content property. Supported values are html (default), json (beta), and text (beta)}
 

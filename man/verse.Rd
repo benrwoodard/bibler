@@ -5,7 +5,6 @@
 \title{Get a verse}
 \usage{
 verse(
-  bibleid = Sys.getenv("MAIN_BIBLEID"),
   verseid = NULL,
   contenttype = "text",
   includenotes = FALSE,
@@ -15,13 +14,12 @@ verse(
   includeversespans = FALSE,
   parallels = c("55212e3cf5d04d49-01", "3aefb10641485092-01"),
   useorgid = FALSE,
+  bibleid = Sys.getenv("MAIN_BIBLEID"),
   debug = FALSE,
   apikey = Sys.getenv("BIBLER_APIKEY")
 )
 }
 \arguments{
-\item{bibleid}{Id of Bible whose Chapters to fetch}
-
 \item{verseid}{Id of the verse to fetch}
 
 \item{contenttype}{Content type to be returned in the content property. Supported values are html (default), json (beta), and text (beta)}
@@ -39,6 +37,8 @@ verse(
 \item{parallels}{Comma delimited list of bibleIds to include}
 
 \item{useorgid}{Use the supplied id(s) to match the verseOrgId instead of the verseId}
+
+\item{bibleid}{Id of Bible whose Chapters to fetch}
 
 \item{debug}{Used to help debug the query}
 

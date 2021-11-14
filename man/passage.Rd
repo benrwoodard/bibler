@@ -5,9 +5,8 @@
 \title{Get passage contents}
 \usage{
 passage(
-  bibleid = Sys.getenv("MAIN_BIBLEID"),
-  passageid = NULL,
-  contenttype = "json",
+  passageid = "mrk.1",
+  contenttype = "text",
   includenotes = FALSE,
   includetitles = TRUE,
   includechapternumbers = FALSE,
@@ -15,13 +14,13 @@ passage(
   includeversespans = FALSE,
   parallels = NULL,
   useorgid = FALSE,
+  returnstring = TRUE,
+  bibleid = Sys.getenv("MAIN_BIBLEID"),
   debug = FALSE,
   apikey = Sys.getenv("BIBLER_APIKEY")
 )
 }
 \arguments{
-\item{bibleid}{Id of Bible whose Chapters to fetch}
-
 \item{passageid}{Id of the Chapter to fetch}
 
 \item{contenttype}{Content type to be returned in the content property. Supported values are html (default), json (beta), and text (beta)}
@@ -39,6 +38,10 @@ passage(
 \item{parallels}{Comma delimited list of bibleIds to include}
 
 \item{useorgid}{Use the supplied id(s) to match the verseOrgId instead of the verseId}
+
+\item{returnstring}{Do you want a table or a string to be returned}
+
+\item{bibleid}{Id of Bible whose Chapters to fetch}
 
 \item{debug}{Used to help debug the query}
 

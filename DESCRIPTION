@@ -1,7 +1,7 @@
 Package: bibler
 Type: Package
 Title: Bible Study In R
-Version: 0.0.0.9001
+Version: 0.0.0.9002
 Author: Ben Woodard <benrwoodard@gmail.com>
 Maintainer: Ben Woodard <benrwoodard@gmail.com>
 Description: This will assist in Bible study and analyzing scripture.
@@ -21,4 +21,5 @@ Imports:
     purrr,
     glue,
     utils,
+    rlang,
     gt
