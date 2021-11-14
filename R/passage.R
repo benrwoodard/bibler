@@ -84,7 +84,6 @@ passage <- function(passageid = NULL,
   httr::stop_for_status(req, task = httr::content(req)$message)
 
   res <- httr::content(req)$data
-  return(c(reference = res$reference,
-           passage = res$content))
+  return(c(res$reference= res$content))
 
 }
