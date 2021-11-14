@@ -1,0 +1,133 @@
+---
+title: "Function tests"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+Bibles
+
+```{r}
+library(bibler)
+library(tidyverse)
+check <- bibles(language = 'grc', details = T)
+check <- bibles(language = 'eng',name = 'k', details = T)
+check
+```
+
+books
+
+```{r}
+bibleid <- '55212e3cf5d04d49-01'  #kjv
+#bibleid <- '3aefb10641485092-01'
+req <- books()
+req
+
+
+```
+
+chapters
+
+```{r}
+
+bookid <- "GEN"
+ch <- chapters('gen')
+
+
+```
+
+chapters
+
+```{r}
+bibleid <- '55212e3cf5d04d49-01'  #kjv
+bookid <- "GEN"
+chapterid <- 'GEN.1'
+ch <- chapter(bibleid, 
+              chapterid, 
+              includenotes = T,
+              contenttype = 'html',
+              includeversenumbers = F, 
+              includetitles = T,
+              debug = F)
+ch
+```
+
+## passages
+
+```{r}
+bibleid <- '55212e3cf5d04d49-01'  #kjv
+bookid <- "GEN"
+chapterid <- 'GEN.1'
+passid <- "MAT.1.12-mat.2.20"
+pdf <- passage(bibleid, 
+              passid, 
+              includenotes = T,
+              contenttype = 'text',
+              includeversespans = F,
+              includeversenumbers = T, 
+              includetitles = T,
+              debug = F)
+pdf
+
+```
+
+## verses
+
+```{r,results = 'asis', echo = F}
+bibleid <- '55212e3cf5d04d49-01'  #kjv
+bookid <- "GEN"
+chapterid <- 'GEN.1'
+passid <- "MAT.1.12-mat.2.20"
+vs <- verses(bibleid, 
+              chapterid, 
+              debug = T)
+vs
+
+```
+
+verse
+
+```{r, results = 'asis', echo = F}
+kjv <- '55212e3cf5d04d49-01'  #kjv
+grc <- '3aefb10641485092-01' #grc
+bookid <- "GEN"
+chapterid <- 'GEN.1'
+verseid <- 'mat.2.11'
+passid <- "MAT.1.12-mat.2.20"
+vs <- verse(bibleid, 
+            verseid, 
+            debug = F,
+            parallels = c(kjv, grc))
+vs
+
+```
+
+## search
+
+```{r}
+
+kjv <- 'de4e12af7f28f599-02'   #kjv
+bibles(name = 'king')
+
+search <- bible_search(kjv,
+             query = 'Jesus\\?said',
+             range = c('mat-jhn'),
+             limit = 180,
+             debug = F)
+search
+
+```
+
+## sections
+
+```{r}
+
+kjv <- 'de4e12af7f28f599-02'   #kjv
+bibles(name = 'king')
+
+sects <- sections(kjv,
+                  'jhn')
+search
+
+```

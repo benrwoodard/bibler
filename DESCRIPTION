@@ -1,17 +1,24 @@
 Package: bibler
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Bible Study In R
 Version: 0.0.900
 Author: Ben Woodard <benrwoodard@gmail.com>
 Maintainer: Ben Woodard <benrwoodard@gmail.com>
-Description: This will assist in bible study and analyzing scripture
-License: MIT
+Description: This will assist in Bible study and analyzing scripture.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.2
 Depends: 
-  R (>= 2.5),
-  tidyverse
+  R (>= 2.5)
 Imports:
-    tidyverse,
+    magrittr,
+    dplyr,
+    stringr,
+    tidyr,
+    httr,
+    tibble,
+    purrr,
+    glue,
+    utils,
     gt
