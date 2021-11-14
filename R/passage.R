@@ -26,7 +26,7 @@
 #' @export
 passage <- function(bibleid = Sys.getenv('MAIN_BIBLEID'),
                     passageid = NULL,
-                    contenttype = 'json',
+                    contenttype = 'text',
                     includenotes = FALSE,
                     includetitles = TRUE,
                     includechapternumbers = FALSE,
