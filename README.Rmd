@@ -74,6 +74,7 @@ This result will show you all the different translations with the phrase 'king j
 2. Search to find a word or phrase you have been looking for.
 
 ```{r}
-bible_search('moses held')
+bible_search(query = 'moses held')
+
 ```
 
