@@ -25,8 +25,7 @@
 #' @importFrom httr verbose
 #'
 #' @export
-verse <- function(bibleid = Sys.getenv('MAIN_BIBLEID'),
-                  verseid = NULL,
+verse <- function(verseid = NULL,
                   contenttype = 'text',
                   includenotes = FALSE,
                   includetitles = TRUE,
@@ -35,6 +34,7 @@ verse <- function(bibleid = Sys.getenv('MAIN_BIBLEID'),
                   includeversespans = FALSE,
                   parallels = c('55212e3cf5d04d49-01','3aefb10641485092-01'),
                   useorgid = FALSE,
+                  bibleid = Sys.getenv('MAIN_BIBLEID'),
                   debug = FALSE,
                   apikey = Sys.getenv('BIBLER_APIKEY')) {
 

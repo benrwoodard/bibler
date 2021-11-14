@@ -24,8 +24,7 @@
 #' @importFrom httr add_headers
 #' @importFrom httr verbose
 #' @export
-passage <- function(bibleid = Sys.getenv('MAIN_BIBLEID'),
-                    passageid = NULL,
+passage <- function(passageid = NULL,
                     contenttype = 'text',
                     includenotes = FALSE,
                     includetitles = TRUE,
@@ -34,6 +33,7 @@ passage <- function(bibleid = Sys.getenv('MAIN_BIBLEID'),
                     includeversespans = FALSE,
                     parallels = NULL,
                     useorgid = FALSE,
+                    bibleid = Sys.getenv('MAIN_BIBLEID'),
                     debug = FALSE,
                     apikey = Sys.getenv('BIBLER_APIKEY')) {
 

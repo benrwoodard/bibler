@@ -23,9 +23,9 @@
 #' @importFrom httr add_headers
 #' @importFrom httr verbose
 #' @export
-chapter <- function(bibleid = Sys.getenv('MAIN_BIBLEID'),
-                    chapterid = NULL,
-                    contenttype = 'json',
+chapter <- function(chapterid = NULL,
+                    bibleid = Sys.getenv('MAIN_BIBLEID'),
+                    contenttype = 'text',
                     includenotes = FALSE,
                     includetitles = TRUE,
                     includechapternumbers = FALSE,

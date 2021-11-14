@@ -16,8 +16,8 @@
 #' @importFrom httr add_headers
 #' @importFrom httr verbose
 #' @export
-sections <- function(bibleid = Sys.getenv('MAIN_BIBLEID'),
-                     bookid = NULL,
+sections <- function(bookid = NULL,
+                     bibleid = Sys.getenv('MAIN_BIBLEID'),
                      debug = FALSE,
                      apikey = Sys.getenv('BIBLER_APIKEY')) {
 
