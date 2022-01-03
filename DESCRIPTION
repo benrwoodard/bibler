@@ -22,4 +22,5 @@ Imports:
     glue,
     utils,
     rlang,
+    rvest,
     gt

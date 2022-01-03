@@ -6,8 +6,8 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of bibler is to enable the analyst to use and improve their
-skills while enhancing their Bible Study time.
+The goal of the bibler package is to enable the analyst to use and
+improve their skills while enhancing their Bible Study time.
 
 ## Installation
 

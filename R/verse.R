@@ -28,11 +28,11 @@
 verse <- function(verseid = NULL,
                   contenttype = 'text',
                   includenotes = FALSE,
-                  includetitles = TRUE,
+                  includetitles = FALSE,
                   includechapternumbers = FALSE,
-                  includeversenumbers = TRUE,
+                  includeversenumbers = FALSE,
                   includeversespans = FALSE,
-                  parallels = c('55212e3cf5d04d49-01','3aefb10641485092-01'),
+                  parallels = NULL,
                   useorgid = FALSE,
                   bibleid = Sys.getenv('MAIN_BIBLEID'),
                   debug = FALSE,
@@ -87,8 +87,7 @@ verse <- function(verseid = NULL,
   res <- httr::content(req)$data
 
   if(is.null(parallels)) {
-   return(c(reference = res$reference,
-           passage = res$content))
+   return(glue::glue("{res$reference}{res$content}"))
   } else {
     biblenames <- map_chr(res$parallels, function(x){
       bibles(ids = x$bibleId)$name

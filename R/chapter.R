@@ -80,6 +80,6 @@ chapter <- function(chapterid = NULL,
   #check status
   httr::stop_for_status(req, task = httr::content(req)$message)
 
-  return(httr::content(req)$data$content)
+  return(glue::glue("{httr::content(req)$data$content}"))
 
 }
