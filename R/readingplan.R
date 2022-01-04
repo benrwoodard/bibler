@@ -1,34 +1,26 @@
 #' Get today's reading plan
 #'
-#' This will return the passage for today's redaing plan
+#' This will return the passage for today's reading plan
 #'
-#' @param language ISO 639-3 three digit language code used to filter results
-#' @param abbreviation Bible abbreviation to search for
-#' @param name Bible name to search for
-#' @param ids Comma separated list of Bible ids to return
-#' @param details Boolean to include full Bible details (e.g. copyright and promo info)
-#' @param debug Used to help debug the query
+#' @param date defaults to today's date
 #' @param apikey API.bible api key. Sign up here https://scripture.api.bible/signup
 #'
 #' @import dplyr
 #' @import tidyr
-#' @import tibble
 #' @import lubridate
 #' @import rvest
 #' @importFrom janitor row_to_names
 #' @importFrom janitor clean_names
 #' @export
-readingplan <- function(date = Sys.Date(),
-                   details = FALSE,
-                   debug = FALSE,
-                   apikey = Sys.getenv('BIBLER_APIKEY')) {
+readingplan <- function(date = Sys.Date()-2,
+                        apikey = Sys.getenv('BIBLER_APIKEY')) {
 
   #read the table on the page
   url <- 'https://www.bible-reading.com/bible-plan.html'
   #library('tidyverse')
   plans <- rvest::read_html(url) %>%
     rvest::html_table(header = TRUE)
-  plan <- plans[[10]]
+  plan <- plans[[3]]
   vss <- plan %>%
     janitor::row_to_names(row_number = 1) %>%
     janitor::clean_names() %>%
@@ -40,10 +32,12 @@ readingplan <- function(date = Sys.Date(),
     vss <- stringr::str_replace(vss, 'II ', '2')
     vss <- stringr::str_replace(vss, 'I ', '1')
     vss <- stringr::str_split(vss, pattern = ' ')
-    vss[[1]][1] <- toupper(str_sub(verses[[1]][1], 1, 3))
-    vss[[1]][2] <- stringr::str_replace(verses[[1]][2], ':', '.')
-    vss[[1]] <- glue::glue("{verses[[1]][1]}.{verses[[1]][2]}")
-    }
+    vss[[1]][1] <- toupper(str_sub(vss[[1]][1], 1, 3))
+    vss[[1]][2] <- stringr::str_replace(vss[[1]][2], ':', '.')
+    vss[[1]] <- glue::glue("{vss[[1]][1]}.{vss[[1]][2]}")
+
+    vss[[1]]
+}
 
 #' Verse of the day
 #'

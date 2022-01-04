@@ -4,28 +4,13 @@
 \alias{readingplan}
 \title{Get today's reading plan}
 \usage{
-readingplan(
-  date = Sys.Date(),
-  details = FALSE,
-  debug = FALSE,
-  apikey = Sys.getenv("BIBLER_APIKEY")
-)
+readingplan(date = Sys.Date() - 2, apikey = Sys.getenv("BIBLER_APIKEY"))
 }
 \arguments{
-\item{details}{Boolean to include full Bible details (e.g. copyright and promo info)}
-
-\item{debug}{Used to help debug the query}
+\item{date}{defaults to today's date}
 
 \item{apikey}{API.bible api key. Sign up here https://scripture.api.bible/signup}
-
-\item{language}{ISO 639-3 three digit language code used to filter results}
-
-\item{abbreviation}{Bible abbreviation to search for}
-
-\item{name}{Bible name to search for}
-
-\item{ids}{Comma separated list of Bible ids to return}
 }
 \description{
-This will return the passage for today's redaing plan
+This will return the passage for today's reading plan
 }
