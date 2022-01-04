@@ -12,12 +12,11 @@
 #' @importFrom janitor row_to_names
 #' @importFrom janitor clean_names
 #' @export
-readingplan <- function(date = Sys.Date()-2,
+readingplan <- function(date = Sys.Date()+30,
                         apikey = Sys.getenv('BIBLER_APIKEY')) {
 
   #read the table on the page
   url <- 'https://www.bible-reading.com/bible-plan.html'
-  #library('tidyverse')
   plans <- rvest::read_html(url) %>%
     rvest::html_table(header = TRUE)
   plan <- plans[[3]]
@@ -34,9 +33,10 @@ readingplan <- function(date = Sys.Date()-2,
     vss <- stringr::str_split(vss, pattern = ' ')
     vss[[1]][1] <- toupper(stringr::str_sub(vss[[1]][1], 1, 3))
     vss[[1]][2] <- stringr::str_replace(vss[[1]][2], ':', '.')
-    vss[[1]] <- glue::glue("{vss[[1]][1]}.{vss[[1]][2]}")
+    preverses <- glue::glue("{vss[[1]][1]}.{vss[[1]][2]}")
+    passage <- stringr::str_replace(preverses, '-', glue::glue('-{vss[[1]][1]}.'))
 
-    vss[[1]]
+    passage
 }
 
 #' Verse of the day
