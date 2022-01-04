@@ -12,7 +12,8 @@
 #' @importFrom janitor row_to_names
 #' @importFrom janitor clean_names
 #' @export
-readingplan <- function(date = Sys.Date(),
+readingplan <- function(date = Sys.Date()+106,
+                        bibleid = Sys.getenv('MAIN_BIBLEID'),
                         apikey = Sys.getenv('BIBLER_APIKEY')) {
 
   #read the table on the page
@@ -28,10 +29,15 @@ readingplan <- function(date = Sys.Date(),
     dplyr::filter(name == tolower(lubridate::wday(date,label = T, abbr = F))) %>%
     dplyr::pull(value)
 
-    vss <- stringr::str_replace(vss, 'II ', '2')
-    vss <- stringr::str_replace(vss, 'I ', '1')
+    bookref <- books(bibleid = bibleid, apikey = apikey) %>%
+      select(id, name)
+
+    vss <- stringr::str_replace(vss,   'I ', '1')
+    vss <- stringr::str_replace(vss,  'II ', '2')
+    vss <- stringr::str_replace(vss, 'III ', '3')
     vss <- stringr::str_split(vss, pattern = ' ')
-    vss[[1]][1] <- toupper(stringr::str_sub(vss[[1]][1], 1, 3))
+    vss[[1]][1] <- gsub("([1-3])([A-Z])", "\\1 \\2", vss[[1]][1])
+    vss[[1]][1] <- gsub(vss[[1]][1], bookref$id[bookref$name == vss[[1]][1]], vss[[1]][1])
     vss[[1]][2] <- stringr::str_replace(vss[[1]][2], ':', '.')
     preverses <- glue::glue("{vss[[1]][1]}.{vss[[1]][2]}")
     passage <- stringr::str_replace(preverses, '-', glue::glue('-{vss[[1]][1]}.'))
