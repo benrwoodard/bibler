@@ -32,7 +32,7 @@ readingplan <- function(date = Sys.Date()-2,
     vss <- stringr::str_replace(vss, 'II ', '2')
     vss <- stringr::str_replace(vss, 'I ', '1')
     vss <- stringr::str_split(vss, pattern = ' ')
-    vss[[1]][1] <- toupper(str_sub(vss[[1]][1], 1, 3))
+    vss[[1]][1] <- toupper(stringr::str_sub(vss[[1]][1], 1, 3))
     vss[[1]][2] <- stringr::str_replace(vss[[1]][2], ':', '.')
     vss[[1]] <- glue::glue("{vss[[1]][1]}.{vss[[1]][2]}")
 
