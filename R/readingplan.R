@@ -12,7 +12,7 @@
 #' @importFrom janitor row_to_names
 #' @importFrom janitor clean_names
 #' @export
-readingplan <- function(date = Sys.Date()+63,
+readingplan <- function(date = Sys.Date(),
                         bibleid = Sys.getenv('MAIN_BIBLEID'),
                         apikey = Sys.getenv('BIBLER_APIKEY')) {
 
@@ -50,7 +50,7 @@ readingplan <- function(date = Sys.Date()+63,
     preverses <- glue::glue("{vss[[1]][1]}.{vss[[1]][2]}")
     passage <- stringr::str_replace(preverses, '-', glue::glue('-{vss[[1]][1]}.'))
     }
-  passage
+  passage(passage, bibleid = bibleid, apikey = apikey )
 }
 
 #' Verse of the day
