@@ -12,7 +12,7 @@
 #' @importFrom janitor row_to_names
 #' @importFrom janitor clean_names
 #' @export
-readingplan <- function(date = Sys.Date()+54,
+readingplan <- function(date = Sys.Date()+63,
                         bibleid = Sys.getenv('MAIN_BIBLEID'),
                         apikey = Sys.getenv('BIBLER_APIKEY')) {
 
@@ -32,7 +32,7 @@ readingplan <- function(date = Sys.Date()+54,
     bookref <- books(bibleid = bibleid, apikey = apikey) %>%
       select(id, name)
 
-    if(length(bookref$id[bookref$name != vss]) == 0) {
+    if(length(bookref$id[bookref$name == vss]) != 0) {
       bookid <- bookref$id[bookref$name == vss]
       ch <- chapters(bookid)
       bookchaptermax <- max(as.numeric(ch$number[ch$number != 'intro']))
