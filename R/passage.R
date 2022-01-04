@@ -84,7 +84,7 @@ passage <- function(passageid = "mrk.1",
                        `api-key` = apikey
                      ))
   #check status
-  httr::stop_for_status(req, task = httr::content(req)$message)
+  httr::stop_for_status(req, task = glue::glue("{httr::content(req)$message} - {passageid}"))
 
   res <- httr::content(req)$data
   colname <- res$reference
