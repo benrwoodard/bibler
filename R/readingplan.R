@@ -12,7 +12,7 @@
 #' @importFrom janitor row_to_names
 #' @importFrom janitor clean_names
 #' @export
-readingplan <- function(date = Sys.Date()+30,
+readingplan <- function(date = Sys.Date(),
                         apikey = Sys.getenv('BIBLER_APIKEY')) {
 
   #read the table on the page
