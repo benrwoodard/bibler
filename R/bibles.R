@@ -19,10 +19,10 @@
 #' @importFrom httr add_headers
 #' @importFrom httr verbose
 #' @export
-bibles <- function(language = NULL,
-                   abbreviation = NULL,
-                   name = NULL,
-                   ids = NULL,
+bibles <- function(language = 'eng',
+                   abbreviation = NA,
+                   name = NA,
+                   ids = NA,
                    details = FALSE,
                    debug = FALSE,
                    apikey = Sys.getenv('BIBLER_APIKEY')) {
@@ -33,10 +33,10 @@ bibles <- function(language = NULL,
   }
   name = URLencode(name)
 
-  vars <- tibble::tibble(language,
-                         abbreviation,
-                         name,
-                         ids,
+  vars <- tibble::tibble(`language` = language,
+                         `abbreviation` = abbreviation,
+                         `name` = name,
+                         `ids` = ids,
                         `include-full-details` = details)
 
 
