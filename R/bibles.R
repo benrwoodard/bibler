@@ -19,7 +19,7 @@
 #' @importFrom httr add_headers
 #' @importFrom httr verbose
 #' @export
-bibles <- function(language = 'eng',
+bibles <- function(language = NA,
                    abbreviation = NA,
                    name = NA,
                    ids = NA,
@@ -29,9 +29,11 @@ bibles <- function(language = 'eng',
 
   #remove spaces from the list of ids items
   if(!is.na(paste(ids,collapse=","))) {
-    ids <- paste(ids,collapse=",")
+    ids <- paste(ids, collapse=",")
   }
-  name = URLencode(name)
+  if(!is.na(name)){
+    name = URLencode(name)
+  }
 
   vars <- tibble::tibble(`language` = language,
                          `abbreviation` = abbreviation,

@@ -5,10 +5,10 @@
 \title{Get a list of available Bible versions}
 \usage{
 bibles(
-  language = NULL,
-  abbreviation = NULL,
-  name = NULL,
-  ids = NULL,
+  language = NA,
+  abbreviation = NA,
+  name = NA,
+  ids = NA,
   details = FALSE,
   debug = FALSE,
   apikey = Sys.getenv("BIBLER_APIKEY")

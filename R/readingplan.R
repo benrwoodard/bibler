@@ -19,7 +19,7 @@ readingplan <- function(date = Sys.Date(),
   #read the table on the page
   url <- 'https://www.bible-reading.com/bible-plan.html'
   plans <- rvest::read_html(url) %>%
-    rvest::html_table(header = TRUE)
+  rvest::html_table(header = TRUE)
   plan <- plans[[3]]
   vss <- plan %>%
     janitor::row_to_names(row_number = 1) %>%
@@ -76,7 +76,7 @@ dayverse <- function(date = Sys.Date()){
     stringr::str_split(pattern = ' ')
 
   for(i in seq(verses)){
-    verses[[i]][1] <- toupper(str_sub(verses[[i]][1], 1, 3))
+    verses[[i]][1] <- toupper(stringr::str_sub(verses[[i]][1], 1, 3))
     verses[[i]][2] <- stringr::str_replace(verses[[i]][2], ':', '.')
     verses[[i]] <- glue::glue("{verses[[i]][1]}.{verses[[i]][2]}")
   }

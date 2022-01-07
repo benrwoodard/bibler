@@ -20,6 +20,8 @@
 #' @import tibble
 #' @importFrom glue glue
 #' @importFrom purrr discard
+#' @importFrom purrr map_df
+#' @importFrom purrr map
 #' @importFrom magrittr %>%
 #' @importFrom httr RETRY
 #' @importFrom httr add_headers
@@ -43,7 +45,8 @@ passage <- function(passageid = "mrk.1",
   if(is.null(bibleid)){
     stop("Please provide a bibleid value")
   }
-
+  #define the Bibles being requested
+  bibleids <- c(bibleid, parallels)
   #remove spaces from the list of ids items
   if(!is.na(paste(parallels,collapse=","))) {
     parallels <- paste(parallels,collapse=",")
@@ -87,14 +90,33 @@ passage <- function(passageid = "mrk.1",
   httr::stop_for_status(req, task = glue::glue("{httr::content(req)$message} - {passageid}"))
 
   res <- httr::content(req)$data
-  colname <- res$reference
-  return(
+
+  if(!is.null(res$parallels)) {
+    mainbible <- data.frame(bibleid = res$bibleId,
+                            ref = res$reference,
+                            content = trimws(res$content))
+    p_bibles <- purrr::map_df(seq(res$parallels), function(x) {
+      data.frame(bibleid = res$parallels[[x]]$bibleId,
+                 ref = res$parallels[[x]]$reference,
+                 content = trimws(res$parallels[[x]]$content))
+    })
+
+    allpars <- rbind(mainbible, p_bibles)
+
+    #reference BibleIds to pull in the name of the bible
+    bibleids <- bibler::bibles(ids = paste(bibleids, collapse = ','))
+    select(bibleids, id, name)
+    final <- allpars %>%
+      left_join(select(bibleids, abbreviation, id, name), by = c('bibleid' = 'id'),
+                keep = F) %>%
+      select(-bibleid) %>%
+      relocate(name, .before = 1)
+    final
+  } else {
     if(returnstring){
-      glue::glue('{res$id} {res$content}')
+      glue::glue('{res$id} {trimws(res$content)}')
     } else {
-      tibble::tibble("{colname}" := glue::glue('{res$id} {res$content}'))
+      tibble::tibble(reference = res$reference, verse = trimws(res$content))
     }
-    )
-
-
+  }
 }

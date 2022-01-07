@@ -4,7 +4,11 @@
 \alias{readingplan}
 \title{Get today's reading plan}
 \usage{
-readingplan(date = Sys.Date() - 2, apikey = Sys.getenv("BIBLER_APIKEY"))
+readingplan(
+  date = Sys.Date(),
+  bibleid = Sys.getenv("MAIN_BIBLEID"),
+  apikey = Sys.getenv("BIBLER_APIKEY")
+)
 }
 \arguments{
 \item{date}{defaults to today's date}
