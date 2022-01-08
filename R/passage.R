@@ -104,7 +104,7 @@ passage <- function(passageid = "mrk.1",
     allpars <- rbind(mainbible, p_bibles)
 
     #reference BibleIds to pull in the name of the bible
-    par.bibleids <- bibler::bibles(ids = paste(main_pars, collapse = ','))
+    par.bibleids <- bibles(ids = paste(main_pars, collapse = ','))
     par.bible <- select(par.bibleids, id, abbreviation)
     final <- allpars %>%
       left_join(select(par.bible, id, abbreviation), by = c('bibleid' = 'id'),
