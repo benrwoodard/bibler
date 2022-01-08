@@ -46,7 +46,7 @@ passage <- function(passageid = "mrk.1",
     stop("Please provide a bibleid value")
   }
   #define the Bibles being requested
-  bibleids <- c(bibleid, parallels)
+  main_pars <- c(bibleid, parallels)
   #remove spaces from the list of ids items
   if(!is.na(paste(parallels,collapse=","))) {
     parallels <- paste(parallels,collapse=",")
@@ -104,10 +104,10 @@ passage <- function(passageid = "mrk.1",
     allpars <- rbind(mainbible, p_bibles)
 
     #reference BibleIds to pull in the name of the bible
-    bibleids <- bibler::bibles(ids = paste(bibleids, collapse = ','))
-    select(bibleids, id, name)
+    par.bibleids <- bibler::bibles(ids = paste(main_pars, collapse = ','))
+    select(par.bibleids, id, name)
     final <- allpars %>%
-      left_join(select(bibleids, abbreviation, id, name), by = c('bibleid' = 'id'),
+      left_join(select(par.bibleids, abbreviation, id, name), by = c('bibleid' = 'id'),
                 keep = F) %>%
       select(-bibleid) %>%
       relocate(name, .before = 1)
