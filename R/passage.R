@@ -105,12 +105,13 @@ passage <- function(passageid = "mrk.1",
 
     #reference BibleIds to pull in the name of the bible
     par.bibleids <- bibler::bibles(ids = paste(main_pars, collapse = ','))
-    select(par.bibleids, id, name)
+    par.bible <- select(par.bibleids, id, abbreviation)
     final <- allpars %>%
-      left_join(select(par.bibleids, abbreviation, id, name), by = c('bibleid' = 'id'),
+      left_join(select(par.bible, id, abbreviation), by = c('bibleid' = 'id'),
                 keep = F) %>%
       select(-bibleid) %>%
-      relocate(name, .before = 1)
+      relocate(abbreviation, .before = 1) %>%
+      rename(bible = 1, passage = content)
     final
   } else {
     if(returnstring){
