@@ -28,7 +28,7 @@ bibles <- function(language = NA,
                    apikey = Sys.getenv('BIBLER_APIKEY')) {
 
   #remove spaces from the list of ids items
-  if(!is.na(paste(ids,collapse=","))) {
+  if(!is.na(ids)) {
     ids <- paste(ids, collapse=",")
   }
   if(!is.na(name)){
