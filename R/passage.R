@@ -51,7 +51,10 @@ passage <- function(passageid = "mrk.1",
   if(!is.na(paste(parallels,collapse=","))) {
     parallels <- paste(parallels,collapse=",")
   }
-
+  if (grepl('[1-9]-[1-9]', passageid, ignore.case = TRUE)) {
+    bookchapter <- stringr::str_extract(passageid, '.*\\.')
+    passageid <- stringr::str_replace(passageid, '-', glue::glue("-{bookchapter}"))
+  }
   vars <- tibble::tibble(`content-type` = contenttype,
                          `include-notes` = includenotes,
                          `include-titles` = includetitles,
