@@ -56,9 +56,9 @@ passage <- function(passageid = "mrk.1",
     book <- stringr::str_extract(passageid, '[^\\.]{3}')
     toverse <- stringr::str_extract(passageid, '(?<=\\-).*')
     if (grepl('\\.', toverse)) {
-      verses <- stringr::str_replace(passageid, '-', glue::glue("-{book}."))
+      passageid <- stringr::str_replace(passageid, '-', glue::glue("-{book}."))
     } else {
-      verses <- stringr::str_replace(passageid, '-', glue::glue("-{bookchapter}."))
+      passageid <- stringr::str_replace(passageid, '-', glue::glue("-{bookchapter}."))
     }
   }
   vars <- tibble::tibble(`content-type` = contenttype,
