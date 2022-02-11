@@ -51,7 +51,7 @@ passage <- function(passageid = "mrk.1",
   if(!is.na(paste(parallels,collapse=","))) {
     parallels <- paste(parallels,collapse=",")
   }
-  if (grepl('[1-9]-[1-9]', passageid, ignore.case = TRUE)) {
+  if (grepl('[1-9]-[1-9]', passageid) && !grepl('[1-9]-[1-9][a-z]', passageid, ignore.case = TRUE)) {
     bookchapter <- stringr::str_extract(passageid, '[^.]*.[^.]*')
     book <- stringr::str_extract(passageid, '[^\\.]{3}')
     toverse <- stringr::str_extract(passageid, '(?<=\\-).*')
