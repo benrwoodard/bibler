@@ -52,8 +52,14 @@ passage <- function(passageid = "mrk.1",
     parallels <- paste(parallels,collapse=",")
   }
   if (grepl('[1-9]-[1-9]', passageid, ignore.case = TRUE)) {
-    bookchapter <- stringr::str_extract(passageid, '.*\\.')
-    passageid <- stringr::str_replace(passageid, '-', glue::glue("-{bookchapter}"))
+    bookchapter <- stringr::str_extract(passageid, '[^.]*.[^.]*')
+    book <- stringr::str_extract(passageid, '[^\\.]{3}')
+    toverse <- stringr::str_extract(passageid, '(?<=\\-).*')
+    if (grepl('\\.', toverse)) {
+      verses <- stringr::str_replace(passageid, '-', glue::glue("-{book}."))
+    } else {
+      verses <- stringr::str_replace(passageid, '-', glue::glue("-{bookchapter}."))
+    }
   }
   vars <- tibble::tibble(`content-type` = contenttype,
                          `include-notes` = includenotes,
